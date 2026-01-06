@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -18,5 +19,18 @@ class User(UserMixin, db.Model):
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    # Optional: Link todo to specific user
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+
+
+class Expense(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    item_name = db.Column(db.String(100), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Link the expense to the user who paid
+    paid_by_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    # This allows us to say expense.payer.username
+    payer = db.relationship('User', backref=db.backref('expenses', lazy=True))
