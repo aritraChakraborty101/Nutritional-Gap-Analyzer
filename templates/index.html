@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form hx-post="/add" hx-target="#todo-list" hx-swap="innerHTML" hx-on::after-request="this.reset()">
+        <input type="text" name="title" placeholder="Add a new task..." required>
+        <button type="submit">Add</button>
+    </form>
+
+    <hr>
+
+    <div id="todo-list">
+        {% include 'partials/item_list.html' %}
+    </div>
+{% endblock %}

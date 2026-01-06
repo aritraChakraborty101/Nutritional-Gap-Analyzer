@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask + HTMX</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+        .item { padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; }
+        button { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Tasks</h1>
+        {% if current_user.is_authenticated %}
+            <span>
+                Hi, {{ current_user.username }}! 
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </span>
+        {% endif %}
+    </div>
+    {% block content %}{% endblock %}
+</body>
+</html>

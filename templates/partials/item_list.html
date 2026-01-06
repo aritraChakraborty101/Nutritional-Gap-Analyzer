@@ -1,0 +1,10 @@
+{% for todo in todos %}
+    <div class="item">
+        <span>{{ todo.title }}</span>
+        <button hx-delete="/delete/{{ todo.id }}" 
+                hx-target="#todo-list" 
+                hx-confirm="Are you sure?">
+            Delete
+        </button>
+    </div>
+{% endfor %}

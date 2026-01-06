@@ -8,16 +8,6 @@
     </style>
 </head>
 <body>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h1>Tasks</h1>
-        {% if current_user.is_authenticated %}
-            <span>
-                Hi, {{ current_user.username }}! 
-                <a href="{{ url_for('logout') }}">Logout</a>
-            </span>
-        {% endif %}
-    </div>
-    {% block content %}{% endblock %}
     <form method="POST">
         <h2>Login</h2>
         {% if error %} <p style="color: red">{{ error }}</p> {% endif %}
