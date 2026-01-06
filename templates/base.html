@@ -2,24 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask + HTMX</title>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <style>
-        body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
-        .item { padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; }
-        button { cursor: pointer; }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h1>Tasks</h1>
-        {% if current_user.is_authenticated %}
-            <span>
-                Hi, {{ current_user.username }}! 
-                <a href="{{ url_for('logout') }}">Logout</a>
-            </span>
-        {% endif %}
+<body class="bg-gray-50">
+    <div class="max-w-2xl mx-auto p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Nutritional Gap Analyzer</h1>
+            {% if current_user.is_authenticated %}
+                <span class="text-gray-600">
+                    Hi, <span class="font-semibold">{{ current_user.username }}</span>! 
+                    <a href="{{ url_for('logout') }}" class="text-blue-600 hover:text-blue-800 underline ml-2">Logout</a>
+                </span>
+            {% endif %}
+        </div>
+        {% block content %}{% endblock %}
     </div>
-    {% block content %}{% endblock %}
 </body>
 </html>
